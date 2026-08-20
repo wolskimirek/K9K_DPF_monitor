@@ -414,32 +414,12 @@
             thumbnail.classList.add('active');
         }
     </script>
-<script>
-  // Poprawiony i zabezpieczony kod licznika bez rejestracji
-  (function() {
-    // Blokada, aby licznik nie naliczał odwiedzin, gdy testujesz plik lokalnie na komputerze
-    if (window.location.protocol === 'file:') {
-      console.log("=== TEST LOKALNY ===");
-      console.log("Licznik zadziała po wrzuceniu na GitHub Pages.");
-      return;
-    }
+<!-- Niewidoczny licznik odwiedzin omijający blokady CORS -->
+<img src="https://seeyoufarm.com" 
+     style="display:none;" 
+     onload="console.log('=== K9K DPF MONITOR ===\nLicznik działa poprawnie w tle!\n=======================')"
+     onerror="console.log('Problem z załadowaniem tła licznika.')" />
 
-    const targetUrl = encodeURIComponent(window.location.origin + window.location.pathname);
-    fetch(`https://pythonanywhere.com{targetUrl}`)
-      .then(response => {
-        if (!response.ok) throw new Error('Błąd serwera');
-        return response.text();
-      })
-      .then(liczbaOdwiedzin => {
-        console.log("%c=== STATYSTYKI K9K DPF MONITOR ===", "color: #79C142; font-weight: bold;");
-        console.log("Łączna liczba wyświetleń strony:", liczbaOdwiedzin);
-        console.log("=====================================");
-      })
-      .catch(err => {
-        console.log("Statystyki tymczasowo niedostępne.");
-      });
-  })();
-</script>
 
 
 </body>

@@ -414,6 +414,19 @@
             thumbnail.classList.add('active');
         }
     </script>
+<script>
+  // Ten kod działa w tle, nie zmienia wyglądu strony i nie wymaga rejestracji
+  const targetUrl = encodeURIComponent(window.location.href);
+  fetch(`https://pythonanywhere.com{targetUrl}`)
+    .then(response => response.text())
+    .then(liczbaOdwiedzin => {
+      // Wynik zobaczysz tylko Ty po wciśnięciu klawisza F12
+      console.log("=== STATYSTYKI STRONY ===");
+      console.log("Łączna liczba wyświetleń:", liczbaOdwiedzin);
+      console.log("=========================");
+    })
+    .catch(err => console.log("Błąd licznika:", err));
+</script>
 
 </body>
 

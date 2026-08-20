@@ -415,18 +415,32 @@
         }
     </script>
 <script>
-  // Ten kod działa w tle, nie zmienia wyglądu strony i nie wymaga rejestracji
-  const targetUrl = encodeURIComponent(window.location.href);
-  fetch(`https://pythonanywhere.com{targetUrl}`)
-    .then(response => response.text())
-    .then(liczbaOdwiedzin => {
-      // Wynik zobaczysz tylko Ty po wciśnięciu klawisza F12
-      console.log("=== STATYSTYKI STRONY ===");
-      console.log("Łączna liczba wyświetleń:", liczbaOdwiedzin);
-      console.log("=========================");
-    })
-    .catch(err => console.log("Błąd licznika:", err));
+  // Poprawiony i zabezpieczony kod licznika bez rejestracji
+  (function() {
+    // Blokada, aby licznik nie naliczał odwiedzin, gdy testujesz plik lokalnie na komputerze
+    if (window.location.protocol === 'file:') {
+      console.log("=== TEST LOKALNY ===");
+      console.log("Licznik zadziała po wrzuceniu na GitHub Pages.");
+      return;
+    }
+
+    const targetUrl = encodeURIComponent(window.location.origin + window.location.pathname);
+    fetch(`https://pythonanywhere.com{targetUrl}`)
+      .then(response => {
+        if (!response.ok) throw new Error('Błąd serwera');
+        return response.text();
+      })
+      .then(liczbaOdwiedzin => {
+        console.log("%c=== STATYSTYKI K9K DPF MONITOR ===", "color: #79C142; font-weight: bold;");
+        console.log("Łączna liczba wyświetleń strony:", liczbaOdwiedzin);
+        console.log("=====================================");
+      })
+      .catch(err => {
+        console.log("Statystyki tymczasowo niedostępne.");
+      });
+  })();
 </script>
+
 
 </body>
 

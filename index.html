@@ -415,31 +415,6 @@
         }
     </script>
 
-<script>
-  // Licznik oparty na pamięci przeglądarki (LocalStorage) - omija wszystkie blokady serwera
-  (function() {
-    try {
-      // Pobierz aktualną liczbę odwiedzin z pamięci urządzenia
-      let wyswietlenia = localStorage.getItem('k9k_odwiedziny');
-      
-      if (!wyswietlenia) {
-        wyswietlenia = 1;
-      } else {
-        wyswietlenia = parseInt(wyswietlenia) + 1;
-      }
-      
-      // Zapisz nową wartość
-      localStorage.setItem('k9k_odwiedziny', wyswietlenia);
-      
-      // Wyświetl wynik wyłącznie dla Ciebie w konsoli F12
-      console.log("%c=== K9K DPF MONITOR ===", "color: #79C142; font-weight: bold; font-size: 14px;");
-      console.log("%cTwoje lokalne odwiedziny na tym urządzeniu: " + wyswietlenia, "color: #007acc; font-weight: bold;");
-      console.log("=======================");
-    } catch (e) {
-      console.log("Pamięć przeglądarki jest zablokowana.");
-    }
-  })();
-</script>
 
 
 </body>

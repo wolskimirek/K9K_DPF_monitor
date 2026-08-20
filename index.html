@@ -414,12 +414,32 @@
             thumbnail.classList.add('active');
         }
     </script>
-<!-- Niewidoczny licznik odwiedzin omijający blokady CORS -->
-<img src="https://seeyoufarm.com" 
-     style="display:none;" 
-     onload="console.log('=== K9K DPF MONITOR ===\nLicznik działa poprawnie w tle!\n=======================')"
-     onerror="console.log('Problem z załadowaniem tła licznika.')" />
 
+<script>
+  // Licznik oparty na pamięci przeglądarki (LocalStorage) - omija wszystkie blokady serwera
+  (function() {
+    try {
+      // Pobierz aktualną liczbę odwiedzin z pamięci urządzenia
+      let wyswietlenia = localStorage.getItem('k9k_odwiedziny');
+      
+      if (!wyswietlenia) {
+        wyswietlenia = 1;
+      } else {
+        wyswietlenia = parseInt(wyswietlenia) + 1;
+      }
+      
+      // Zapisz nową wartość
+      localStorage.setItem('k9k_odwiedziny', wyswietlenia);
+      
+      // Wyświetl wynik wyłącznie dla Ciebie w konsoli F12
+      console.log("%c=== K9K DPF MONITOR ===", "color: #79C142; font-weight: bold; font-size: 14px;");
+      console.log("%cTwoje lokalne odwiedziny na tym urządzeniu: " + wyswietlenia, "color: #007acc; font-weight: bold;");
+      console.log("=======================");
+    } catch (e) {
+      console.log("Pamięć przeglądarki jest zablokowana.");
+    }
+  })();
+</script>
 
 
 </body>
